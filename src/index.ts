@@ -26,7 +26,7 @@ const priceBot = async () => {
         try {
             const response = await fetch(`${config.ENDPOINT}${config.SYMBOL_TICKER}`)
             const result = await response.json() as PriceResult
-            console.log(new Date(), result) // debug
+            console.log(new Date(), config.SYMBOL_TICKER, result) // debug
 
             if (!result.price) throw new Error('Price Not Found.')
 
