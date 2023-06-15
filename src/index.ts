@@ -12,6 +12,7 @@ client.login(config.TOKEN)
 
 client.on('ready', async () => {
     console.log('Price Tracker Bot Connected!')
+    priceBot()
 })
 
 type PriceResult = {
@@ -25,6 +26,7 @@ const priceBot = async () => {
         try {
             const response = await fetch(`${config.ENDPOINT}${config.SYMBOL_TICKER}`)
             const result = await response.json() as PriceResult
+            console.log(new Date(), result) // debug
 
             if (!result.price) throw new Error('Price Not Found.')
 
@@ -38,7 +40,7 @@ const priceBot = async () => {
     }
 
 
-    client.on('ready', async () => {
+    //client.on('ready', async () => {
         setPrice()
 
         new Cron.CronJob(
@@ -49,7 +51,7 @@ const priceBot = async () => {
             null,
             true,
         )
-    })
+    //})
 }
 
-priceBot()
+//priceBot()
